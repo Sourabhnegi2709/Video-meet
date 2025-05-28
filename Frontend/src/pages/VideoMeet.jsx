@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { Button, TextField } from '@mui/material';
 import { io } from 'socket.io-client';
 import { useParams, useNavigate } from 'react-router-dom';
+import server from '../environment';
 
 
 
@@ -16,7 +17,7 @@ import CallEndIcon from '@mui/icons-material/CallEnd';
 import ChatIcon from '@mui/icons-material/Chat';
 
 
-const server_url = 'http://localhost:6001';
+const server_url = server;
 
 const peerConfigConnections = {
     iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
