@@ -8,7 +8,7 @@ const userInfo = {};    // { socketId: { username, roomId } }
 const connectToSocket = (server) => {
     const io = new Server(server, {
         cors: {
-            origin: 'https://video-meet-frontend-2grn.onrender.com/', // ⚠️ Replace with your frontend URL in production
+            origin: 'https://video-meet-frontend-2grn.onrender.com', // ⚠️ Replace with your frontend URL in production
             methods: ['GET', 'POST'],
             allowedHeaders: ["*"],
             credentials: true,
