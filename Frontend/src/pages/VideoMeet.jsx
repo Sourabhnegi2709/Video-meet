@@ -355,18 +355,21 @@ function VideoMeet() {
             )}
 
             {/* Videos Container */}
-            <div className="flex-1 relative md:ml-auto" style={{ minHeight: '100vh' }}>
+            <div className="flex-1 relative md:ml-auto min-h-screen bg-[#0f172a]">
                 {/* Remote Videos */}
-                <div className="absolute top-4 left-3 right-3 flex gap-4 justify-center flex-wrap max-h-[calc(100vh-220px)] overflow-y-auto p-2
-        md:flex-row
-        flex-col
-        md:max-h-[calc(100vh-220px)]
-        max-h-[40vh]
-      ">
+                <div
+                    className="absolute top-4 left-3 right-3 grid gap-4 p-2 w-full"
+                    style={{
+                        display: 'grid',
+                        gridTemplateColumns: `repeat(auto-fit, minmax(160px, 1fr))`,
+                        placeItems: 'center',
+                        maxHeight: 'calc(100vh - 220px)',
+                    }}
+                >
                     {videos.map((v) => (
                         <div
                             key={v.socketId}
-                            className="relative w-[90vw] max-w-[300px] h-[200px] md:h-[400px] rounded-3xl overflow-hidden bg-black border border-gray-600 hover:scale-105 transition-transform duration-300"
+                            className="relative w-full aspect-video rounded-3xl overflow-hidden bg-black border border-gray-600 hover:scale-105 transition-transform duration-300"
                         >
                             <video
                                 autoPlay
@@ -381,7 +384,7 @@ function VideoMeet() {
                 </div>
 
                 {/* Local Video */}
-                <div className="absolute bottom-20 right-6 w-[45vw] max-w-[250px] h-[120px] md:w-[250px] md:h-[180px] bg-black rounded-3xl overflow-hidden border border-gray-600 hover:scale-105 transition-transform duration-300">
+                <div className="absolute bottom-20 right-4 w-[45vw] max-w-[250px] aspect-video bg-black rounded-3xl overflow-hidden border border-gray-600 hover:scale-105 transition-transform duration-300">
                     <video
                         ref={localVideoRef}
                         autoPlay
@@ -392,8 +395,10 @@ function VideoMeet() {
                 </div>
 
                 {/* Controls */}
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 md:gap-4 bg-black bg-opacity-60 px-4 md:px-6 py-3 md:py-4 rounded-xl shadow-lg z-20">
-                    <Button onClick={toggleChat} color="inherit" size="small"><ChatIcon fontSize="small" /></Button>
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-wrap gap-3 md:gap-4 bg-black bg-opacity-60 px-4 md:px-6 py-3 md:py-4 rounded-xl shadow-lg z-20">
+                    <Button onClick={toggleChat} color="inherit" size="small">
+                        <ChatIcon fontSize="small" />
+                    </Button>
                     <Button onClick={toggleVideo} color="inherit" size="small">
                         {isVideoOn ? <VideocamIcon fontSize="small" /> : <VideocamOffIcon fontSize="small" />}
                     </Button>
@@ -403,9 +408,12 @@ function VideoMeet() {
                     <Button onClick={toggleScreenShare} color="inherit" size="small">
                         {isScreenSharing ? <StopScreenShareIcon fontSize="small" /> : <ScreenShareIcon fontSize="small" />}
                     </Button>
-                    <Button color="error" onClick={leaveCall} size="small"><CallEndIcon fontSize="small" /></Button>
+                    <Button color="error" onClick={leaveCall} size="small">
+                        <CallEndIcon fontSize="small" />
+                    </Button>
                 </div>
             </div>
+
         </div>
     );
 
