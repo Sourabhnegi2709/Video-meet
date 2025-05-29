@@ -32,50 +32,53 @@ function Navbar() {
 
     return (
         <nav className="relative z-10 w-full h-[4.5rem] flex flex-wrap items-center justify-between px-4 sm:px-8 bg-black shadow-md">
-    <div className="flex items-center gap-3 sm:gap-6">
-        <Link to="/" className="text-[1.3rem] font-bold text-white">
-            Zoom
-        </Link>
-        {!isLoggedIn && (
-            <Link
-                to="/home"
-                className="flex items-center text-[1.2rem] font-bold text-white gap-2"
-            >
-                <AiFillHome size={25} />
-                home
-            </Link>
-        )}
-    </div>
-
-    <div className="flex items-center gap-4 sm:gap-6 mt-2 sm:mt-0">
-        {isLoggedIn && (
-            <>
-                <Link
-                    to="/home"
-                    className="text-white text-[1rem] sm:text-[1.2rem] font-medium hover:underline"
-                >
-                    Join as Guest
+            <div className="flex items-center gap-3 sm:gap-6">
+                <Link to="/" className="text-[1.3rem] font-bold text-white">
+                    Zoom
                 </Link>
-                <button
-                    onClick={handleLogout}
-                    disabled={isLoggingOut}
-                    className="text-white text-[1rem] sm:text-[1.2rem] font-medium hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                    {isLoggingOut ? 'Logging out...' : 'Logout'}
-                </button>
-            </>
-        )}
+                {isLoggedIn && (
+                    <Link
+                        to="/home"
+                        className="flex items-center text-[1.2rem] font-bold text-white gap-2"
+                    >
+                        <AiFillHome size={25} />
+                        home
+                    </Link>
+                )}
+            </div>
 
-        {!isLoggedIn && (
-            <Link
-                to="/auth"
-                className="text-white text-[1rem] sm:text-[1.2rem] font-medium hover:underline"
-            >
-                Login / Signup
-            </Link>
-        )}
-    </div>
-</nav>
+            <div className="flex items-center gap-4 sm:gap-6 mt-2 sm:mt-0">
+                {isLoggedIn && (
+                    <>
+
+                        <button
+                            onClick={handleLogout}
+                            disabled={isLoggingOut}
+                            className="text-white text-[1rem] sm:text-[1.2rem] font-medium hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            {isLoggingOut ? 'Logging out...' : 'Logout'}
+                        </button>
+                    </>
+                )}
+
+                {!isLoggedIn && (
+                    <>
+                        <Link
+                            to="/home"
+                            className="text-white text-[1rem] sm:text-[1.2rem] font-medium hover:underline"
+                        >
+                            Join as Guest
+                        </Link>
+                        <Link
+                            to="/auth"
+                            className="text-white text-[1rem] sm:text-[1.2rem] font-medium hover:underline"
+                        >
+                            Login / Signup
+                        </Link>
+                    </>
+                )}
+            </div>
+        </nav>
 
     );
 }
