@@ -18,7 +18,7 @@ const uri = process.env.MONGO_URL;
 
 
 app.use(cors({
-    origin: 'https://video-meet-frontend-2grn.onrender.com/', // frontend URL
+    origin: 'https://video-meet-frontend-2grn.onrender.com', // frontend URL
     credentials: true
 }));
 
