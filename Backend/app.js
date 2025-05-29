@@ -7,11 +7,13 @@ import { createServer } from 'node:http';
 import connectToSocket from './src/controllers/socketManager.js';
 import userRoute from './src/routes/userRoutes.js';
 
+
 dotenv.config();
 
 const app = express();
 const server = createServer(app);
 connectToSocket(server); // optional if you're using sockets
+
 
 const port = process.env.PORT || 6001;
 const uri = process.env.MONGO_URL;
@@ -32,6 +34,8 @@ app.use("/api/v1/users", userRoute);
 
 
 
+
+
 app.get("/", (req, res) => {
     res.send("Server is running");
 });
@@ -49,3 +53,7 @@ const start = async () => {
 };
 
 start();
+
+
+import path from 'path';
+

@@ -289,19 +289,18 @@ function VideoMeet() {
     return (
         <div className="w-full h-screen bg-[#1e293b] relative text-white flex flex-col md:flex-row">
             {/* Chat Sidebar */}
-
             {isChatOn && (
                 <div
                     className={`fixed md:static top-0 left-0 bg-[#0f172a] border-r border-gray-700 flex flex-col transition-transform duration-300 ease-in-out z-40
-      ${isChatCollapsed ? '-translate-x-full md:translate-x-0' : 'translate-x-0'}
-      w-full md:w-[30%] h-full md:h-auto`}
+        ${isChatCollapsed ? '-translate-x-full md:translate-x-0' : 'translate-x-0'}
+        w-full md:w-[30%] h-full md:h-auto`}
                     style={{ maxHeight: '100vh' }}
                 >
                     {/* Header */}
                     <div className="flex justify-between items-center p-3 border-b border-gray-700 flex-shrink-0">
                         <h3 className="text-lg font-semibold text-white">Chat</h3>
                         <button
-                            className="md:hidden text-white"
+                            className="md:hidden text-white text-2xl leading-none"
                             onClick={() => setIsChatCollapsed(!isChatCollapsed)}
                             aria-label="Toggle Chat"
                         >
@@ -322,16 +321,12 @@ function VideoMeet() {
                             >
                                 <p className="text-xs text-gray-400">{msg.sender}</p>
                                 <div
-                                    className={`inline-block px-3 py-2 rounded-lg max-w-[80%] break-words ${msg.senderId === socketRef.current.id
-                                            ? 'bg-blue-500 text-white'
-                                            : 'bg-gray-700 text-white'
+                                    className={`inline-block px-3 py-2 rounded-lg max-w-[80%] break-words ${msg.senderId === socketRef.current.id ? 'bg-blue-500 text-white' : 'bg-gray-700 text-white'
                                         }`}
                                 >
                                     {msg.message}
                                 </div>
-                                <p className="text-[10px] text-gray-500 mt-0.5">
-                                    
-                                </p>
+                                <p className="text-[10px] text-gray-500 mt-0.5"></p>
                             </div>
                         ))}
                         {<p className="text-sm italic text-gray-400 mt-2">He/She is typing...</p>}
@@ -343,7 +338,7 @@ function VideoMeet() {
                             type="text"
                             value={chatInput}
                             onChange={(e) => setChatInput(e.target.value)}
-                            onKeyDown={(e) => e.key === "Enter" && handleSend()}
+                            onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                             className="flex-1 border border-gray-600 rounded px-3 py-2 bg-[#1e293b] text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Type a message..."
                             autoComplete="off"
@@ -359,32 +354,34 @@ function VideoMeet() {
                 </div>
             )}
 
-
             {/* Videos Container */}
             <div className="flex-1 relative md:ml-auto" style={{ minHeight: '100vh' }}>
                 {/* Remote Videos */}
-                <div className="absolute top-4 left-3 right-3 flex gap-4 justify-center flex-wrap max-h-[calc(100vh-220px)] overflow-y-auto p-2">
+                <div className="absolute top-4 left-3 right-3 flex gap-4 justify-center flex-wrap max-h-[calc(100vh-220px)] overflow-y-auto p-2
+        md:flex-row
+        flex-col
+        md:max-h-[calc(100vh-220px)]
+        max-h-[40vh]
+      ">
                     {videos.map((v) => (
                         <div
                             key={v.socketId}
-                            className="relative w-[300px] h-[400px] rounded-3xl overflow-hidden bg-black border border-gray-600 hover:scale-105 transition-transform duration-300"
+                            className="relative w-[90vw] max-w-[300px] h-[200px] md:h-[400px] rounded-3xl overflow-hidden bg-black border border-gray-600 hover:scale-105 transition-transform duration-300"
                         >
                             <video
                                 autoPlay
-                                muted
                                 playsInline
                                 ref={(el) => {
                                     if (el && v.stream) el.srcObject = v.stream;
                                 }}
                                 className="w-full h-full object-cover rounded-3xl"
                             />
-
                         </div>
                     ))}
                 </div>
 
                 {/* Local Video */}
-                <div className="absolute bottom-20 right-6 w-[250px] h-[180px] bg-black rounded-3xl overflow-hidden border border-gray-600 hover:scale-105 transition-transform duration-300">
+                <div className="absolute bottom-20 right-6 w-[45vw] max-w-[250px] h-[120px] md:w-[250px] md:h-[180px] bg-black rounded-3xl overflow-hidden border border-gray-600 hover:scale-105 transition-transform duration-300">
                     <video
                         ref={localVideoRef}
                         autoPlay
@@ -395,26 +392,23 @@ function VideoMeet() {
                 </div>
 
                 {/* Controls */}
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-4 bg-black bg-opacity-60 px-6 py-4 rounded-xl shadow-lg z-20">
-                    <Button onClick={toggleChat} color="inherit"><ChatIcon /></Button>
-                    <Button onClick={toggleVideo} color="inherit">
-                        {isVideoOn ? <VideocamIcon /> : <VideocamOffIcon />}
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 md:gap-4 bg-black bg-opacity-60 px-4 md:px-6 py-3 md:py-4 rounded-xl shadow-lg z-20">
+                    <Button onClick={toggleChat} color="inherit" size="small"><ChatIcon fontSize="small" /></Button>
+                    <Button onClick={toggleVideo} color="inherit" size="small">
+                        {isVideoOn ? <VideocamIcon fontSize="small" /> : <VideocamOffIcon fontSize="small" />}
                     </Button>
-                    <Button onClick={toggleAudio} color="inherit">
-                        {isAudioOn ? <MicIcon /> : <MicOffIcon />}
+                    <Button onClick={toggleAudio} color="inherit" size="small">
+                        {isAudioOn ? <MicIcon fontSize="small" /> : <MicOffIcon fontSize="small" />}
                     </Button>
-                    <Button onClick={toggleScreenShare} color="inherit">
-                        {isScreenSharing ? <StopScreenShareIcon /> : <ScreenShareIcon />}
+                    <Button onClick={toggleScreenShare} color="inherit" size="small">
+                        {isScreenSharing ? <StopScreenShareIcon fontSize="small" /> : <ScreenShareIcon fontSize="small" />}
                     </Button>
-                    <Button color="error" onClick={leaveCall}><CallEndIcon /></Button>
+                    <Button color="error" onClick={leaveCall} size="small"><CallEndIcon fontSize="small" /></Button>
                 </div>
             </div>
         </div>
-
-
-
-
     );
+
 }
 
 export default VideoMeet;

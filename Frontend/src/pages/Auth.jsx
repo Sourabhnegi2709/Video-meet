@@ -15,6 +15,7 @@ import { signup, login } from '../services/api'; // import your API functions
 import { useNavigate } from "react-router-dom";
 
 
+
 const AuthForm = () => {
   const [formState, setFormState] = useState(0);
   const [message, setMessage] = useState("");
@@ -50,7 +51,7 @@ const AuthForm = () => {
           localStorage.setItem('user', JSON.stringify(res.data.user));
         }
         setForm({ username: '', name: '', password: '' }); // reset form
-        window.location.href = '/home'; // redirect to home after signup
+        navigate('/home'); // redirect to home after signup
       } else {
         const res = await login({ name: form.name, password: form.password });
         
@@ -64,7 +65,7 @@ const AuthForm = () => {
           localStorage.setItem('user', JSON.stringify(res.data.user));
         }
         setForm({ name: '', password: '' }); // reset form
-        window.location.href = '/home'; // redirect to home after login
+        navigate('/home'); // redirect to home after login
       }
     } catch (err) {
       console.error('Auth error:', err.response?.data || err.message);
